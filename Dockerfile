@@ -46,6 +46,7 @@ RUN \
 
   echo "**** extract only folder 'web' ****" && \
   tar -C /app/www/public --strip-components=2 -zxvf /tmp/mrbs.tar.gz $(tar --exclude="*/*" -tf /tmp/mrbs.tar.gz)web && \
+  sed -r -i 's/(public function .*\)\)$)/\1 : void/' /app/www/public/lib/MRBS/Logger.php && \
   mkdir -p /usr/share/mrbs && \
   tar -C /usr/share/mrbs --wildcards --strip-components=1 -zxvf /tmp/mrbs.tar.gz $(tar --exclude="*/*" -tf /tmp/mrbs.tar.gz)tables.*.sql && \
   echo "**** cleanup ****" && \

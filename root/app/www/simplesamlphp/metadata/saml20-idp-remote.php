@@ -10,7 +10,17 @@ require '/config/www/config.inc.php';
  * See: https://simplesamlphp.org/docs/stable/simplesamlphp-reference-idp-remote
  */
 $metadata[$auth['saml']['ssp_idp']] = [
-    'SingleSignOnService' => $auth['saml']['ssp_single_sign_on_service'],
-    'SingleLogoutService' => $auth['saml']['ssp_single_logout_service'],
+    'SingleSignOnService' => [
+        [
+            'Location' => $auth['saml']['ssp_single_sign_on_service'],
+            'Binding'  => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
+        ],
+    ],
+    'SingleLogoutService' => [
+        [
+            'Location'         => $auth['saml']['ssp_single_logout_service'],
+            'Binding'          => 'urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect',
+        ],
+    ],
     'certData' => $auth['saml']['ssp_cert_data'],
 ];

@@ -11,8 +11,8 @@ $config = [
         'core:AdminPassword',
     ],
 
-    // An authentication source which can authenticate against both SAML 2.0
-    // and Shibboleth 1.3 IdPs.
+
+    // An authentication source which can authenticate against SAML 2.0 IdPs.
     'default-sp' => [
         'saml:SP',
 
@@ -23,5 +23,17 @@ $config = [
         // The entity ID of the IdP this SP should contact.
         // Can be NULL/unset, in which case the user will be shown a list of available IdPs.
         'idp' => $auth['saml']['ssp_idp'],
+
+        // The URL to the discovery service.
+        // Can be NULL/unset, in which case a builtin discovery service will be used.
+        'discoURL' => null,
+
+        /*
+         * If SP behind the SimpleSAMLphp in IdP/SP proxy mode requests
+         * AuthnContextClassRef, decide whether the AuthnContextClassRef will be
+         * processed by the IdP/SP proxy or if it will be passed to the original
+         * IdP in front of the IdP/SP proxy.
+         */
+        'proxymode.passAuthnContextClassRef' => false,
     ],
 ];

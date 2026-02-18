@@ -1,9 +1,9 @@
 FROM ghcr.io/linuxserver/baseimage-alpine-nginx:3.21
 
 # versions
-ARG MRBS_RELEASE=v1.11.6
-ARG SIMPLESAMLPHP_RELEASE=1.19.9
-ARG MODERN_MRBS_THEME_RELEASE=v0.5.1
+ARG MRBS_RELEASE=1.12.1
+ARG SIMPLESAMLPHP_RELEASE=2.4.4
+ARG MODERN_MRBS_THEME_RELEASE=0.5.1
 
 LABEL maintainer="Dorian Zedler <mail@dorian.im>"
 
@@ -42,7 +42,7 @@ RUN \
   rm -rf /app/www && \
   mkdir -p /app/www/public && \
   curl -o /tmp/mrbs.tar.gz -L \
-    "https://github.com/meeting-room-booking-system/mrbs-code/archive/${MRBS_RELEASE}.tar.gz" && \
+    "https://github.com/meeting-room-booking-system/mrbs-code/archive/v${MRBS_RELEASE}.tar.gz" && \
 
   echo "**** extract only folder 'web' ****" && \
   tar -C /app/www/public --strip-components=2 -zxvf /tmp/mrbs.tar.gz $(tar --exclude="*/*" -tf /tmp/mrbs.tar.gz)web && \
@@ -56,7 +56,7 @@ RUN \
   mkdir -p /app/www/simplesamlphp && \
   curl -o \
   /tmp/simplesamlphp.tar.gz -L \
-    "https://github.com/simplesamlphp/simplesamlphp/releases/download/v${SIMPLESAMLPHP_RELEASE}/simplesamlphp-${SIMPLESAMLPHP_RELEASE}.tar.gz" && \
+    "https://github.com/simplesamlphp/simplesamlphp/releases/download/v${SIMPLESAMLPHP_RELEASE}/simplesamlphp-${SIMPLESAMLPHP_RELEASE}-slim.tar.gz" && \
   echo "**** extract simplesamlphp ****" && \
   tar -C /app/www/simplesamlphp --strip-components=1 -zxvf /tmp/simplesamlphp.tar.gz && \
   echo "**** cleanup ****" && \
@@ -66,7 +66,7 @@ RUN \
   echo "**** fetch modern-mrbs-theme ****" && \
   mkdir -p /app/www/public/Themes/modern && \
   curl -o /tmp/modern-mrbs-theme.tar.gz -L \
-    "https://github.com/dorianim/modern-mrbs-theme/archive/${MODERN_MRBS_THEME_RELEASE}.tar.gz" && \
+    "https://github.com/dorianim/modern-mrbs-theme/archive/v${MODERN_MRBS_THEME_RELEASE}.tar.gz" && \
   echo "**** extract only folder 'modern' ****" && \
   tar -C /app/www/public/Themes/modern --strip-components=2 -zxvf /tmp/modern-mrbs-theme.tar.gz $(tar --exclude="*/*" -tf /tmp/modern-mrbs-theme.tar.gz)modern && \
   \

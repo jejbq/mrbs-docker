@@ -34,8 +34,12 @@ $db_tbl_prefix = "mrbs_";
 // connections if you can.
 $db_persist = false;
 
+// default to blue theme
+$theme = "blue";
+$custom_css_url = 'Themes/'.$theme.'/custom.css';
+
 // default to modern theme
-$theme = "modern";
+//$theme = "modern";
 $disable_menu_items_for_non_admins = ["rooms", "user_list"];
 
 /**********
@@ -63,8 +67,10 @@ $timezone = getenv("TZ") ? getenv("TZ") : "Europe/Berlin";
  *************/
 
 $auth['saml']['ssp_path'] = '/app/www/simplesamlphp';
+$auth['saml']['authsource'] = 'default-sp';
+$auth['saml']['disable_mrbs_session_init'] = false;
 $auth['saml']['ssp_protect_web_interface'] = true;
 $auth['saml']['ssp_secure_cookie'] = false;
-$auth['saml']['authsource'] = 'default-sp';
+$auth['deny_public_access'] = true;
 
 require "/config/www/config.inc.php";

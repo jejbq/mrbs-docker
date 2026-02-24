@@ -36,7 +36,7 @@ $db_persist = false;
 
 // default to blue theme
 $theme = "blue";
-$custom_css_url = 'Themes/'.$theme.'/custom.css';
+//$custom_css_url = 'Themes/'.$theme.'/custom.css';
 
 // default to modern theme
 //$theme = "modern";
